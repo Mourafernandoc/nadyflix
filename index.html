@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadyflix - 1ª Temporada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #141414;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Cabeçalho */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e50914;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .profile-badge {
+            background: #e50914;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Banner Destaque */
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 50px 50px 50px;
+            background: linear-gradient(to top, #141414, rgba(20, 20, 20, 0.4)), #1f1f1f;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #aaa;
+            max-width: 600px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Seção de Episódios */
+        .content-section {
+            padding: 20px 50px 50px 50px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e5e5e5;
+        }
+
+        .row-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #232323;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            z-index: 10;
+        }
+
+        .card-thumbnail {
+            width: 100%;
+            height: 150px;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Vídeo de prévia no card */
+        .card-thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .card-thumbnail video {
+            opacity: 1;
+        }
+
+        .play-overlay {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: rgba(229, 9, 20, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, background 0.2s;
+            z-index: 2;
+        }
+
+        .card:hover .play-overlay {
+            background: #e50914;
+            transform: scale(1.1);
+        }
+
+        .card-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 0.82rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        /* Modal do Player de Vídeo Principal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #181818;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .modal-content video {
+            width: 100%;
+            display: block;
+            background: black;
+            max-height: 60vh;
+            object-fit: contain;
+        }
+
+        .modal-info {
+            padding: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .modal-desc {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.8rem;
+            border-top: 1px solid #222;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Nadyflix</div>
+        <div class="profile-badge">1ª Temporada Exclusiva</div>
+    </header>
+
+    <section class="hero">
+        <h1 class="hero-title">Nady: A Série</h1>
+        <p class="hero-subtitle">Uma temporada imperdível baseada em fatos reais, pequenos detalhes diários e em tudo o
+            que torna você absolutamente única.</p>
+    </section>
+
+    <main class="content-section">
+        <h2 class="section-title">Episódios Disponíveis</h2>
+
+        <div class="row-grid">
+            <!-- Card 1 -->
+            <div class="card"
+                onclick="abrirVideo('video1.mp4', 'Episódio 1', 'Gosta de resolver as coisas do seu jeito, mas adora quando pegam pra resolver te trazendo só os resultados.')"
+                onmouseenter="previewOn(this)" onmouseleave="previewOff(this)">
+                <div class="card-thumbnail">
+                    <video src="video1.mp4" muted preload="metadata"></video>
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Ep. 1: Do seu jeito</div>
+                    <div class="card-desc">Gosta de resolver as coisas do seu jeito, mas adora quando pegam pra resolver
+                        te trazendo só os resultados.</div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card"
+                onclick="abrirVideo('video2.mp4', 'Episódio 2', 'Mostra pro mundo uma casca grossa para ninguém te machucar, mas na verdade é dócil, gentil e carente como um panda.')"
+                onmouseenter="previewOn(this)" onmouseleave="previewOff(this)">
+                <div class="card-thumbnail">
+                    <video src="video2.mp4" muted preload="metadata"></video>
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Ep. 2: Casca Grossa</div>
+                    <div class="card-desc">Mostra pro mundo uma casca grossa para ninguém te machucar, mas na verdade é
+                        dócil, gentil e carente como um panda.</div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card"
+                onclick="abrirVideo('video3.mp4', 'Episódio 3', 'No sol da manhã seus olhos mudam... ficam da cor de mel cheios de esperanças para um novo dia... e no sol do entardecer eles ficam dourados...')"
+                onmouseenter="previewOn(this)" onmouseleave="previewOff(this)">
+                <div class="card-thumbnail">
+                    <video src="video3.mp4" muted preload="metadata"></video>
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Ep. 3: Brilho do Sol</div>
+                    <div class="card-desc">No sol da manhã seus olhos mudam... ficam da cor de mel cheios de
+                        esperanças... e no entardecer ficam dourados para combinar com o dia finalizado.</div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="card"
+                onclick="abrirVideo('video5.mp4', 'Episódio 5', 'Gosta mais de cuidar do que de ser cuidada... por falta de costume não sabe lidar com alguém te dando cuidados.')"
+                onmouseenter="previewOn(this)" onmouseleave="previewOff(this)">
+                <div class="card-thumbnail">
+                    <video src="video5.mp4" muted preload="metadata"></video>
+                    <div class="play-overlay">▶</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Ep. 5: Cuidar e Cuidar</div>
+                    <div class="card-desc">Gosta mais de cuidar do que de ser cuidada... por falta de costume não sabe
+                        lidar com alguém te dando cuidados.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal do Vídeo Principal -->
+    <div id="videoModal" class="modal" onclick="fecharFora(event)">
+        <div class="modal-content">
+            <button class="close-btn" onclick="fecharVideo()">&times;</button>
+            <video id="playerVideo" controls controlsList="nodownload">
+                Seu navegador não suporta vídeos.
+            </video>
+            <div class="modal-info">
+                <div id="modalTitle" class="modal-title">Título do Episódio</div>
+                <div id="modalDesc" class="modal-desc">Descrição do episódio aqui...</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>Nadyflix • Criado com carinho exclusivamente para você ❤️</footer>
+
+    <script>
+        // Funções para a prévia ao passar o mouse (estilo Netflix)
+        function previewOn(card) {
+            const vid = card.querySelector('video');
+            vid.play().catch(e => { }); // Toca a prévia em loop mudo
+        }
+
+        function previewOff(card) {
+            const vid = card.querySelector('video');
+            vid.pause();
+            vid.currentTime = 0; // Volta para o começo
+        }
+
+        // Funções do Modal Principal (quando clica para assistir)
+        function abrirVideo(arquivoVideo, titulo, descricao) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('playerVideo');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+
+            video.src = arquivoVideo;
+            modalTitle.innerText = titulo;
+            modalDesc.innerText = descricao;
+
+            modal.style.display = 'flex';
+            video.play();
+        }
+
+        function fecharVideo() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('playerVideo');
+
+            video.pause();
+            video.src = "";
+            modal.style.display = 'none';
+        }
+
+        function fecharFora(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target === modal) {
+                fecharVideo();
+            }
+        }
+    </script>
+</body>
+
+</html>
