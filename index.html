@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nadyflix - 2ª Temporada</title>
+    <title>Nadyflix - Temporadas 1 e 2</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
@@ -77,9 +77,9 @@
             line-height: 1.5;
         }
 
-        /* Seção de Episódios */
+        /* Seções de Episódios */
         .content-section {
-            padding: 20px 50px 50px 50px;
+            padding: 20px 50px 40px 50px;
         }
 
         .section-title {
@@ -87,6 +87,8 @@
             font-weight: 600;
             margin-bottom: 20px;
             color: #e5e5e5;
+            border-left: 4px solid #e50914;
+            padding-left: 12px;
         }
 
         .row-grid {
@@ -176,7 +178,7 @@
             line-height: 1.4;
         }
 
-        /* Modal do Player de Vídeo Principal */
+        /* Modal do Vídeo Principal */
         .modal {
             display: none;
             position: fixed;
@@ -266,17 +268,18 @@
 
     <header>
         <div class="logo">Nadyflix</div>
-        <div class="profile-badge">2ª Temporada Exclusiva</div>
+        <div class="profile-badge">Catálogo Exclusivo</div>
     </header>
 
     <section class="hero">
-        <h1 class="hero-title">Nady: O que eu sei de você:</h1>
-        <p class="hero-subtitle">Uma temporada imperdível baseada em fatos reais, pequenos detalhes diários e em tudo o
-            que torna você absolutamente única.</p>
+        <h1 class="hero-title">Nady: O que eu sei de você</h1>
+        <p class="hero-subtitle">Uma série imperdível baseada em fatos reais, pequenos detalhes diários e em tudo o que
+            torna você absolutamente única.</p>
     </section>
 
+    <!-- 1ª TEMPORADA -->
     <main class="content-section">
-        <h2 class="section-title">Episódios Disponíveis</h2>
+        <h2 class="section-title">1ª Temporada</h2>
 
         <div class="row-grid">
             <!-- Card 1 -->
@@ -338,67 +341,73 @@
                         lidar com alguém te dando cuidados.</div>
                 </div>
             </div>
+        </div>
+    </main>
+
+    <!-- 2ª TEMPORADA -->
+    <main class="content-section" style="padding-top: 0;">
+        <h2 class="section-title">2ª Temporada</h2>
+
+        <div class="row-grid">
             <!-- Card 6 -->
             <div class="card"
-                onclick="abrirVideo('video6.mp4', 'Episódio 6', 'fica ouvindo musica sentada viajando na vibe, mas quando toca um piseiro sai dançando toda agitada...mesmo sem parceiro.')"
+                onclick="abrirVideo('video6.mp4', 'Episódio 6', 'Fica ouvindo música sentada viajando na vibe, mas quando toca um piseiro sai dançando toda agitada... mesmo sem parceiro.')"
                 onmouseenter="previewOn(this)" onmouseleave="previewOff(this)">
                 <div class="card-thumbnail">
                     <video src="video6.mp4" muted preload="metadata"></video>
                     <div class="play-overlay">▶</div>
                 </div>
                 <div class="card-body">
-                    <div class="card-title">Ep. 6: viajando na musica </div>
-                    <div class="card-desc">fica ouvindo musica sentada viajando na vibe,
-                        mas quando toca um piseiro sai dançando toda agitada...mesmo sem parceiro.</div>
+                    <div class="card-title">Ep. 6: Viajando na música</div>
+                    <div class="card-desc">Fica ouvindo música sentada viajando na vibe, mas quando toca um piseiro sai
+                        dançando toda agitada... mesmo sem parceiro.</div>
                 </div>
             </div>
 
             <!-- Card 11 -->
             <div class="card"
-                onclick="abrirVideo('video11.mp4', 'Episódio 11', 'adora novas musicas, porem curti mais as que contam parte de sua historia e momento ...ainda se imagina na situação da musica')"
+                onclick="abrirVideo('video11.mp4', 'Episódio 11', 'Adora novas músicas, porém curte mais as que contam parte de sua história e momento... ainda se imagina na situação da música.')"
                 onmouseenter="previewOn(this)" onmouseleave="previewOff(this)">
                 <div class="card-thumbnail">
                     <video src="video11.mp4" muted preload="metadata"></video>
                     <div class="play-overlay">▶</div>
                 </div>
                 <div class="card-body">
-                    <div class="card-title">Ep. 11: Novas historias </div>
-                    <div class="card-desc">adora novas musicas, porem curti mais as que contam parte de sua historia e
-                        momento
-                        ...ainda se imagina na situação da musica.</div>
+                    <div class="card-title">Ep. 11: Novas histórias</div>
+                    <div class="card-desc">Adora novas músicas, porém curte mais as que contam parte de sua história e
+                        momento... ainda se imagina na situação da música.</div>
                 </div>
             </div>
 
             <!-- Card 14 -->
             <div class="card"
-                onclick="abrirVideo('video14.mp4', 'Episódio 14', 'ama ser elogiada por tudo que faz...mas quando ouve um obrigado mãe ... o coração transborda de emoção' )"
+                onclick="abrirVideo('video14.mp4', 'Episódio 14', 'Ama ser elogiada por tudo que faz... mas quando ouve um obrigado mãe... o coração transborda de emoção.')"
                 onmouseenter="previewOn(this)" onmouseleave="previewOff(this)">
                 <div class="card-thumbnail">
                     <video src="video14.mp4" muted preload="metadata"></video>
                     <div class="play-overlay">▶</div>
                 </div>
                 <div class="card-body">
-                    <div class="card-title">Ep. 14: Ama ser mãe </div>
-                    <div class="card-desc">ama ser elogiada por tudo que faz...mas quando ouve um
-                        "obrigado mãe ..." o coração transborda de emoção.</div>
+                    <div class="card-title">Ep. 14: Ama ser mãe</div>
+                    <div class="card-desc">Ama ser elogiada por tudo que faz... mas quando ouve um "obrigado mãe..." o
+                        coração transborda de emoção.</div>
                 </div>
             </div>
 
             <!-- Card 19 -->
             <div class="card"
-                onclick="abrirVideo('video19.mp4', 'Episódio 19', 'quando trago sua jujuba favorita pq eu sempre sei das coisas que gosta...transborda de felicidade igual uma criança quando ganha doce( ate por que é uma criança)' )"
+                onclick="abrirVideo('video19.mp4', 'Episódio 19', 'Quando trago sua jujuba favorita pq eu sempre sei das coisas que gosta... transborda de felicidade igual uma criança quando ganha doce (até por que é uma criança).')"
                 onmouseenter="previewOn(this)" onmouseleave="previewOff(this)">
                 <div class="card-thumbnail">
                     <video src="video19.mp4" muted preload="metadata"></video>
                     <div class="play-overlay">▶</div>
                 </div>
                 <div class="card-body">
-                    <div class="card-title">Ep. 19: Felicidade de criança </div>
-                    <div class="card-desc">quando trago sua jujuba favorita pq eu sempre sei das coisas que gosta...
-                        transborda de felicidade igual uma criança quando ganha doce( ate por que é uma criança).</div>
+                    <div class="card-title">Ep. 19: Felicidade de criança</div>
+                    <div class="card-desc">Quando trago sua jujuba favorita pq eu sempre sei das coisas que gosta...
+                        transborda de felicidade igual uma criança quando ganha doce.</div>
                 </div>
             </div>
-
         </div>
     </main>
 
